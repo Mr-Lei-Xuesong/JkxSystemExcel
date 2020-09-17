@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -18,6 +19,7 @@ import lombok.EqualsAndHashCode;
  * @since 2020-09-17
  */
 @Data
+@Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
 @TableName("users")
 public class Users implements Serializable {

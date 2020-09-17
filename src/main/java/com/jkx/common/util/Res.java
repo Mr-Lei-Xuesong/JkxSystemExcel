@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * 返回数据
+ * @author lx
  */
 public class Res extends HashMap<String, Object> {
     private static final long serialVersionUID = 1L;
