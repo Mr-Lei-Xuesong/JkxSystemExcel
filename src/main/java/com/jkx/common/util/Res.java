@@ -39,7 +39,7 @@ public class Res extends HashMap<String, Object> {
         return res;
     }
 
-    public static Res ok(String msg,Object data) {
+    public static Res ok(String msg, Object data) {
         Res res = new Res();
         res.put("msg", msg);
         res.put("data", data);
