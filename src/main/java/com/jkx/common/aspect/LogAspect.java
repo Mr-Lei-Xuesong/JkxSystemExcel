@@ -1,4 +1,4 @@
-package com.jkx.config;
+package com.jkx.common.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
