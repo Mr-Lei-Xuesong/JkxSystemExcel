@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jkx.dao.StudentInfoDao">
+
+
+    <insert id="saveAll">
+        insert into student_info
+        <foreach collection="sortCol" open="(" close=")" item="list" separator=",">
+            ${list}
+        </foreach>
+        values
+        <foreach collection="data" item="map" separator="," index="index">
+            <foreach collection="map" item="col" separator="," open="(" close=")">
+               '${col}'
+            </foreach>
+        </foreach>
+    </insert>
+
+    <insert id="saveOne">
+
+    </insert>
+
+
+</mapper>
