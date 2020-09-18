@@ -35,6 +35,7 @@ public class Res extends HashMap<String, Object> {
 
     public static Res ok(Object data) {
         Res res = new Res();
+        res.put("code", HttpStatus.SC_OK);
         res.put("msg", "success");
         res.put("data", data);
         return res;
@@ -42,6 +43,7 @@ public class Res extends HashMap<String, Object> {
 
     public static Res ok(String msg, Object data) {
         Res res = new Res();
+        res.put("code", HttpStatus.SC_OK);
         res.put("msg", msg);
         res.put("data", data);
         return res;
@@ -49,6 +51,7 @@ public class Res extends HashMap<String, Object> {
 
     public static Res ok(Map<String, Object> data) {
         Res res = new Res();
+        res.put("code", HttpStatus.SC_OK);
         res.put("data", data);
         return res;
     }
