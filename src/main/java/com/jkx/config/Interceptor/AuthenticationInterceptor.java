@@ -37,56 +37,62 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     PasswordEncoder passwordEncoder;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // 从 Cookie 中取出 token
-        Cookie[] cookies = request.getCookies();
-        Optional<Cookie> first = Arrays.stream(cookies)
-                .filter(cookie -> "token".equals(cookie.getName()))
-                .findFirst();
-        Cookie tokenCookie = first.orElse(new Cookie("token",""));
-        String token = tokenCookie.getValue();
-
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         // 如果不是映射到方法直接通过
         if (!(handler instanceof HandlerMethod)){
             return  true;
         }
+
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
         Class<?> declaringClass = method.getDeclaringClass();
         boolean classAnnotation = declaringClass.isAnnotationPresent(TokenRequired.class);
         boolean methodAnnotation = method.isAnnotationPresent(TokenRequired.class);
 
+        // 如果 类 和 方法上都没有 TokenRequired注解 直接通过
+        if (!classAnnotation && !methodAnnotation) {
+            return true;
+        }
 
-        if (classAnnotation || methodAnnotation) {
-            TokenRequired tokenRequired = classAnnotation ?
-                    declaringClass.getAnnotation(TokenRequired.class) :
-                    method.getAnnotation(TokenRequired.class);
-            if (tokenRequired.required()) {
+        // 从 Cookie 中取出 token
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null) {
+            throw new LoginException(401,"无token");
+        }
+        Optional<Cookie> first = Arrays.stream(cookies)
+                .filter(cookie -> "token".equals(cookie.getName()))
+                .findFirst();
+        Cookie tokenCookie = first.orElse(new Cookie("token",""));
+        String token = tokenCookie.getValue();
 
-                if (token == null) {
-                    throw new LoginException(401,"无token，请重新登录");
-                }
+        TokenRequired tokenRequired = classAnnotation ?
+                declaringClass.getAnnotation(TokenRequired.class) :
+                method.getAnnotation(TokenRequired.class);
+        if (tokenRequired.required()) {
 
-                String account;
-                try {
-                    account = JWT.decode(token)
-                            .getClaim("account").asString();
-                } catch (JWTDecodeException j) {
-                    throw new LoginException(401,"无效token");
-                }
-                User user = usersService.findByAccount(account);
-                if (user == null){
-                    throw new LoginException(401,"无效token");
-                }
-                try {
-                    if (!JwtUtil.verity(token, user.getPassword())){
-                        throw new LoginException(401,"无效token");
-                    }
-                } catch (JWTVerificationException e) {
-                    throw new LoginException(401,"无效token");
-                }
-                return true;
+            if (token == null) {
+                throw new LoginException(401,"无token，请重新登录");
             }
+
+            String account;
+            try {
+                account = JWT.decode(token)
+                        .getClaim("account").asString();
+            } catch (JWTDecodeException j) {
+                throw new LoginException(401,"无效token");
+            }
+            User user = usersService.findByAccount(account);
+            if (user == null){
+                throw new LoginException(401,"无效token");
+            }
+            try {
+                if (!JwtUtil.verity(token, user.getPassword())){
+                    throw new LoginException(401,"无效token");
+                }
+            } catch (JWTVerificationException e) {
+                throw new LoginException(401,"无效token");
+            }
+            return true;
         }
 
         return true;

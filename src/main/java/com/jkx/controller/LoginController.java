@@ -29,9 +29,15 @@ public class LoginController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    /**
+     * 登录
+     * @param form 登录表单
+     * @param response response
+     * @return Res
+     */
     @PostMapping
     public Res login(@RequestBody LoginForm form, HttpServletResponse response) {
-        String token = null;
+        String token;
         User user = usersService.findByAccount(form.getAccount());
         if (user == null) {
             return Res.error("账号密码错误");
@@ -42,8 +48,6 @@ public class LoginController {
         token = JwtUtil.sign(user.getAccount(),user.getPassword());
         Cookie cookie = new Cookie("token",token);
         response.addCookie(cookie);
-        response.addHeader("token",token);
-        response.setHeader("token",token);
         return Res.ok(user.getAccount());
     }
 }

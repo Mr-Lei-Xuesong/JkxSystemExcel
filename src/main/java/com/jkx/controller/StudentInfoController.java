@@ -33,15 +33,10 @@ public class StudentInfoController {
     @Autowired
     StudentInfoServiceImpl studentService;
 
-    /**
-     * 获取所有学生信息
-     *
-     * @return
-     */
     @Autowired
     ExcelServiceImpl excelService;
 
-    @GetMapping("/getSomeAll")
+    @GetMapping("/list")
     public DataResult getSome() {
         List<Map<String, String>> studentInfo = studentService.getAll();
         int ok = 0;
@@ -73,7 +68,7 @@ public class StudentInfoController {
 
     }
 
-    @GetMapping("/delStudentInfo")
+    @GetMapping("/del")
     public DataResult delStudentInfo(int id) {
         int i = studentService.delStudentInfo(id);
         if (i != 0) {
