@@ -19,7 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
         //将我们上步定义的实现了HandlerInterceptor接口的拦截器实例authenticationInterceptor
         // 添加InterceptorRegistration中，并设置过滤规则，
         // 所有请求都要经过authenticationInterceptor拦截。
-        registry.addInterceptor(authenticationInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(authenticationInterceptor).addPathPatterns("/**").excludePathPatterns("/login/**");
 
     }
 }

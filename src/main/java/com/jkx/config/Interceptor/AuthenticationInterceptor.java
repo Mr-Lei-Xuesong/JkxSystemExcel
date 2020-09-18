@@ -38,8 +38,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        // 从 http 请求头中取出 token
-        // String token = request.getHeader("token");
+        // 从 Cookie 中取出 token
         Cookie[] cookies = request.getCookies();
         Optional<Cookie> first = Arrays.stream(cookies)
                 .filter(cookie -> "token".equals(cookie.getName()))
@@ -70,14 +69,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
                 String account;
                 try {
-                    DecodedJWT decode = JWT.decode(token);
-                    account = decode.getClaim("account").asString();
-                    Date exp = decode.getClaim("exp").asDate();
-                    Date now = new Date();
-//                    if (now.getTime() > exp.getTime()) {
-//                        // 过期
-//                        throw new LoginException(401,"token已过期");
-//                    }
+                    account = JWT.decode(token)
+                            .getClaim("account").asString();
                 } catch (JWTDecodeException j) {
                     throw new LoginException(401,"无效token");
                 }
