@@ -3,7 +3,11 @@
 <mapper namespace="com.jkx.dao.ExcelMapperDao">
 
     <select id="getExcelMapper" resultType="java.util.Map">
-        select * from student_info_column_mapper
+        select excel_name,database_name from student_info_column_mapper
+    </select>
+
+    <select id="getType" resultType="java.util.Map">
+        select excel_name,`type` from student_info_column_mapper
     </select>
 
 </mapper>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -52,6 +53,29 @@ class JkxSystemExcelApplicationTests {
             return false;
         }
         return true;
+    }
+
+    @Test
+    void testType() {
+        try {
+            Object obj = Class.forName("java.util.Date").newInstance();
+            String strDateFormat = "yyyy/MM/dd";
+            SimpleDateFormat sdf = new SimpleDateFormat(strDateFormat);
+            System.out.println(sdf.format(obj));
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    void testClassType() {
+        Map<String, String> type = excelService.getType();
+        System.out.println(type);
     }
 
 }

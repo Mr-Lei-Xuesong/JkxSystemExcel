@@ -14,6 +14,15 @@ import java.util.Map;
 @Repository
 public interface ExcelMapperDao {
 
+    /**
+     * 查询数据库与excel对应的字段名
+     * @return
+     */
     List<Map<String,String>> getExcelMapper();
+
+    /**
+     * 查询excel字段对应的java类型
+     */
+    List<Map<String,String>> getType();
 
 }

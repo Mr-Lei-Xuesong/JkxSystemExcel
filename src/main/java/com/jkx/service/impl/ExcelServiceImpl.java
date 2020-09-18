@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,7 +22,7 @@ public class ExcelServiceImpl implements ExcelService {
      * @return
      */
     @Override
-    public List<Map<String, Object>> parseExcel(File file) {
+    public List<Map<String, Object>> parseExcel(File file, Map<String, String> databaseType) {
 
         ExcelReader reader = ExcelUtil.getReader(file);
         List<Map<String, Object>> read = reader.readAll();
@@ -36,6 +34,28 @@ public class ExcelServiceImpl implements ExcelService {
             for (Map.Entry<String, Object> entry : map.entrySet()) {
                 if (entry.getValue() == null) {
                     map.put(entry.getKey(), "");
+                }
+                if (entry.getKey() == "") {
+                    continue;
+                }
+                // 获取字段对应的类型
+                // 如果是 java.util.Date 类型，并且没有值，就设置为当前日期
+                System.out.println(entry.getKey());
+                System.out.println(databaseType.get(entry.getKey()));
+                if (databaseType.get(entry.getKey()).equals("java.util.Date")
+                        && (entry.getValue() == null || entry.getValue() == "")) {
+                    try {
+                        Object obj = Class.forName(databaseType.get(entry.getKey())).newInstance();
+                        String strDateFormat = "yyyy/MM/dd";
+                        SimpleDateFormat sdf = new SimpleDateFormat(strDateFormat);
+                        map.put(entry.getKey(), sdf.format(obj));
+                    } catch (InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
             // 过滤 key 为null的值
@@ -80,5 +100,16 @@ public class ExcelServiceImpl implements ExcelService {
             mapper.put(excel_name, database_name);
         }
         return mapper;
+    }
+
+    @Override
+    public Map<String, String> getType() {
+        List<Map<String, String>> type = mapperMapper.getType();
+        Map<String, String> map = new HashMap<>(50);
+        for (Map<String, String> m : type) {
+            // 设置key - value
+            map.put(m.get("excel_name"), m.get("type"));
+        }
+        return map;
     }
 }

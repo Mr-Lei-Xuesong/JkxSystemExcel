@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * @author lx
  */
-@Configuration
+//@Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
     AuthenticationInterceptor authenticationInterceptor;
