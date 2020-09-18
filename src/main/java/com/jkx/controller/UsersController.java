@@ -1,10 +1,10 @@
 package com.jkx.controller;
 
+import com.jkx.common.annotation.TokenRequired;
 import com.jkx.common.util.Res;
-import com.jkx.entity.Users;
+import com.jkx.entity.User;
 import com.jkx.service.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/users")
+@TokenRequired
 public class UsersController {
 
     @Autowired
@@ -26,7 +27,7 @@ public class UsersController {
 
     @GetMapping("/list")
     public Res getAll() {
-        List<Users> list = usersService.list();
+        List<User> list = usersService.list();
         if (list.isEmpty()) {
             return Res.error();
         } else {
@@ -36,16 +37,16 @@ public class UsersController {
 
     @GetMapping("/get/{id}")
     public Res getById(@PathVariable Integer id) {
-        Users byId = usersService.getById(id);
+        User byId = usersService.getById(id);
         if (byId != null) {
             return Res.ok(byId);
         } else {
-            return Res.error("查无此人");
+            return Res.error("用户不存在");
         }
     }
 
     @PostMapping("/save")
-    public Res save(Users users) {
+    public Res save(User users) {
         boolean save = usersService.save(users);
         if (save) {
             return Res.ok();
@@ -55,7 +56,7 @@ public class UsersController {
     }
 
     @PutMapping("/update")
-    public Res update(Users users) {
+    public Res update(User users) {
         boolean update = usersService.update(users, null);
         if (update) {
             return Res.ok("修改成功");

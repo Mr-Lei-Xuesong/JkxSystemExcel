@@ -3,7 +3,7 @@
 <mapper namespace="com.jkx.dao.IUsersDao">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.jkx.entity.Users">
+    <resultMap id="BaseResultMap" type="com.jkx.entity.User">
         <id column="Id" property="Id" />
         <result column="Account" property="Account" />
         <result column="Password" property="Password" />
@@ -25,5 +25,8 @@
     <sql id="Base_Column_List">
         Id, Account, Password, RealName, Gender, Tel, Email, Department, Description, PreviousVisit, LastVisit, CreateDate, CreateUser, ModifyDate, ModifyUser
     </sql>
+    <select id="findByAccount" parameterType="java.lang.String" resultType="com.jkx.entity.User">
+        select <include refid="Base_Column_List"></include> from users where Account = #{account};
+    </select>
 
 </mapper>

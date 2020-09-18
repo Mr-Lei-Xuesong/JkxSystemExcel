@@ -1,6 +1,6 @@
 package com.jkx.dao;
 
-import com.jkx.entity.Users;
+import com.jkx.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -15,6 +15,12 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Mapper
-public interface IUsersDao extends BaseMapper<Users> {
+public interface IUsersDao extends BaseMapper<User> {
+   /**
+    * 根据账号查找 用户
+    * @param account 账号
+    * @return user
+    */
+   User findByAccount(String account);
 
 }
