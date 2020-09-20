@@ -1,5 +1,0 @@
-columns:
-  columns-type:
-    str: java.lang.String
-    int: java.lang.Integer
-    t: t

@@ -14,8 +14,3 @@ server:
     encoding:
       charset: UTF-8
 
-
-columns:
-  columns-type:
-    str: java.lang.String
-    int: java.lang.Integer

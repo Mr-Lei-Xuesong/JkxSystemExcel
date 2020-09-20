@@ -12,7 +12,7 @@ import java.util.Map;
  * @author Mr zhang
  */
 @Configuration
-@PropertySource(value = {"classpath:columns-config.yaml"})
+@PropertySource(value = {"classpath:columns-config.properties"})
 @ConfigurationProperties(prefix = "columns")
 @Data
 public class ColumnsConfig {
