@@ -7,11 +7,8 @@ import com.jkx.common.util.Res;
 import com.jkx.service.impl.ExcelServiceImpl;
 import com.jkx.service.impl.StudentInfoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -75,9 +72,7 @@ public class StudentInfoController {
         if (i != 0) {
             return Res.ok("插入成功");
         }
-        return Res.error("插入失败");
-//        return DataResult.error(0);
-
+        return Res.error(500,"插入失败");
     }
 
     /**
@@ -94,13 +89,36 @@ public class StudentInfoController {
         return Res.error();
     }
 
+    @RequestMapping("/delSome")
+    public Res delSomeStudent(@RequestBody List<String> ids){
+        System.out.println("ssss");
+        int i = studentService.delSomeStudentInfo(ids);
+        if (i != 0) {
+            return Res.ok("删除成功");
+        }
+        return Res.error(500, "删除失败");
+
+    }
+
     /**
      * 保存一个学生
      * @return
      */
-    @GetMapping("/saveOne")
-    public Res saveOne() {
-        return null;
+    @RequestMapping("/insertOne")
+    public Res saveOne(@RequestBody Map<String, Object> map) {
+
+        System.out.println(map);
+        // 得到数据库字段映射
+        Map<String, String> excelMapper = excelService.getExcelMapper();
+
+        // 获取数据库字段名对应java的类型映射
+        Map<String, String> databaseType = excelService.getType();
+
+        int i = studentService.saveOne(map, excelMapper, databaseType);
+        if (i!=0){
+            return Res.ok("添加成功");
+        }
+        return Res.error();
     }
 
 }

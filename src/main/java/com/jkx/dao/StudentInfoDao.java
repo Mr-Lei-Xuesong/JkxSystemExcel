@@ -13,7 +13,6 @@ import java.util.Map;
 @Repository
 public interface StudentInfoDao {
 
-    @Select("select * from student_info")
     List<Map<String, String>> getAll();
 
     /**
@@ -21,13 +20,31 @@ public interface StudentInfoDao {
      * @return 保存条数
      */
     int saveAll(@Param("data") List<Map<String, Object>> data,
-                @Param("mapper") Map<String, String> mapper,
                 @Param("sortCol") List<String> sortCol);
 
 
+    /**
+     * 删除学生信息通过id
+     * @param id
+     * @return
+     */
     @Delete("delete from student_info where id = #{id}")
     int delStudentInfo(@Param("id") int id);
 
+    /**
+     * 批量删除
+     * @param ids id列表
+     * @return
+     */
+    int delSomeStudentInfo(@Param("ids") List<String> ids);
 
-    int saveOne();
+
+    /**
+     * 插入一条学生信息
+     * @param data
+     * @return
+     */
+    int saveOne(@Param("data") Map<String, Object> data,
+                @Param("sortCol") List<String> sortCol);
+
 }

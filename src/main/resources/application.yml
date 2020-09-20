@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: lx
+    active: zxq
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
@@ -9,3 +9,13 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+
+
+columns:
+  columns-type:
+    str: java.lang.String
+    int: java.lang.Integer

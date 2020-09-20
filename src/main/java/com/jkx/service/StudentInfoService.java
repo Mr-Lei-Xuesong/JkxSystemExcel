@@ -1,9 +1,5 @@
 package com.jkx.service;
 
-import com.jkx.dao.StudentInfoDao;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +11,15 @@ public interface StudentInfoService {
      */
     List<Map<String, String>> getAll();
 
-    int saveAll(@Param("data") List<Map<String, Object>> data,
-                @Param("mapper") Map<String, String> mapper);
+    int saveAll(List<Map<String, Object>> data,
+                Map<String, String> mapper);
 
-    int delStudentInfo(@Param("id") int id);
+    int delStudentInfo(int id);
+
+    int delSomeStudentInfo(List<String> ids);
+
+    int saveOne(Map<String, Object> map,
+                Map<String, String> mapper,
+                Map<String, String> databaseType);
+
 }
