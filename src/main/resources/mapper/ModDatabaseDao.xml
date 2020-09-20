@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jkx.dao.ModDatabaseDao">
+
+    <update id="addCol">
+        alter table student_info ADD ${colName} ${colType}(${colNum}) comment '${colComment}'
+    </update>
+
+    <insert id="addMapper" >
+        insert into student_info_column_mapper(excel_name, database_name, type) values('${excelName}', '${colName}', '${javaType}')
+    </insert>
+
+    <update id="deleteCol" parameterType="java.lang.String">
+        alter table student_info drop column ${colName}
+    </update>
+
+    <delete id="deleteMapper" parameterType="java.lang.String">
+        delete from student_info_column_mapper where database_name = #{colName}
+    </delete>
+
+
+</mapper>

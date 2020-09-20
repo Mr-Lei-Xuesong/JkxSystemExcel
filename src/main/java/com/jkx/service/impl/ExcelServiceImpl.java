@@ -2,12 +2,14 @@ package com.jkx.service.impl;
 
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
+import com.jkx.common.util.ExcelTypeUtils;
 import com.jkx.dao.ExcelMapperDao;
 import com.jkx.service.ExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,6 +26,7 @@ public class ExcelServiceImpl implements ExcelService {
     @Override
     public List<Map<String, Object>> parseExcel(File file, Map<String, String> databaseType) {
 
+        // 解析excel数据
         ExcelReader reader = ExcelUtil.getReader(file);
         List<Map<String, Object>> read = reader.readAll();
         List<Map<String, Object>> readAll = new ArrayList<>();
@@ -31,55 +34,13 @@ public class ExcelServiceImpl implements ExcelService {
         reader.close();
         // 遍历map 把值为null的修改为""
         for (Map<String, Object> map : read) {
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                if (entry.getValue() == null) {
-                    map.put(entry.getKey(), "");
-                }
-                if (entry.getKey() == "") {
-                    continue;
-                }
-                // 获取字段对应的类型
-                // 如果是 java.util.Date 类型，并且没有值，就设置为当前日期
-                System.out.println(entry.getKey());
-                System.out.println(databaseType.get(entry.getKey()));
-                if (databaseType.get(entry.getKey()).equals("java.util.Date")
-                        && (entry.getValue() == null || entry.getValue() == "")) {
-                    try {
-                        Object obj = Class.forName(databaseType.get(entry.getKey())).newInstance();
-                        String strDateFormat = "yyyy/MM/dd";
-                        SimpleDateFormat sdf = new SimpleDateFormat(strDateFormat);
-                        map.put(entry.getKey(), sdf.format(obj));
-                    } catch (InstantiationException e) {
-                        e.printStackTrace();
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            // 过滤 key 为null的值
-            map = map.entrySet().stream()
-                    .filter((e) -> checkKey(e.getKey()))
-                    .collect(Collectors.toMap(
-                            Map.Entry::getKey,
-                            Map.Entry::getValue
-                    ));
-            readAll.add(map);
+            Map<String, Object> filter = ExcelTypeUtils.filter(map, databaseType);
+            readAll.add(filter);
         }
-
         return readAll;
     }
 
-    private static boolean checkKey(String key) {
-        if (key == "" || key.equals(" ")) {
-            return false;
-        }
-        if (null == key) {
-            return false;
-        }
-        return true;
-    }
+
 
     @Autowired
     ExcelMapperDao mapperMapper;
@@ -102,6 +63,11 @@ public class ExcelServiceImpl implements ExcelService {
         return mapper;
     }
 
+    /**
+     * 获取数据库中 excel字段对应的java类型
+     *
+     * @return
+     */
     @Override
     public Map<String, String> getType() {
         List<Map<String, String>> type = mapperMapper.getType();
