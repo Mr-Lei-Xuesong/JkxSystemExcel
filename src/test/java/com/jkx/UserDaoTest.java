@@ -19,7 +19,6 @@ public class UserDaoTest {
 
     @Test
     void findByAccount(){
-        Map<String, String> columnsType = columnsConfig.getColumnsType();
-        System.out.println(columnsType);
+        System.out.println(columnsConfig);
     }
 }
