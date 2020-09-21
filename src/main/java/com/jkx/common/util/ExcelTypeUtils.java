@@ -1,9 +1,8 @@
 package com.jkx.common.util;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -35,19 +34,12 @@ public class ExcelTypeUtils {
         }
         // 过滤 key 为null的值
         map = map.entrySet().stream()
-                .filter((e) -> checkKey(e.getKey()))
+                .filter((e) -> !StringUtils.isBlank(e.getKey()))
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue
                 ));
 
         return map;
-    }
-
-    private static boolean checkKey(String key) {
-        if (key == "" || " ".equals(key) || null == key) {
-            return false;
-        }
-        return true;
     }
 }

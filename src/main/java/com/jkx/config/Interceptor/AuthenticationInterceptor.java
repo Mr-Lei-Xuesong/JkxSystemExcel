@@ -3,7 +3,6 @@ package com.jkx.config.Interceptor;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.jkx.common.annotation.TokenRequired;
 import com.jkx.common.exception.LoginException;
 import com.jkx.common.util.JwtUtil;
@@ -21,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -57,23 +55,21 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         // 从 Cookie 中取出 token
         Cookie[] cookies = request.getCookies();
         if (cookies == null) {
-            throw new LoginException(401,"无token");
+            throw new LoginException(401,"未登录");
         }
         Optional<Cookie> first = Arrays.stream(cookies)
                 .filter(cookie -> "token".equals(cookie.getName()))
                 .findFirst();
         Cookie tokenCookie = first.orElse(new Cookie("token",""));
         String token = tokenCookie.getValue();
+        if (token == null) {
+            throw new LoginException(401,"未登录");
+        }
 
         TokenRequired tokenRequired = classAnnotation ?
                 declaringClass.getAnnotation(TokenRequired.class) :
                 method.getAnnotation(TokenRequired.class);
         if (tokenRequired.required()) {
-
-            if (token == null) {
-                throw new LoginException(401,"无token，请重新登录");
-            }
-
             String account;
             try {
                 account = JWT.decode(token)
