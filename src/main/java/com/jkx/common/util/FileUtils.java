@@ -8,6 +8,11 @@ import java.io.*;
  * MultipartFile 转换城 File
  */
 public class FileUtils {
+    /**
+     *
+     * @param file excel文件
+     * @return
+     */
     public static File multipartFileToFile(MultipartFile file) {
         File toFile = null;
         InputStream ins = null;
@@ -32,6 +37,11 @@ public class FileUtils {
         return toFile;
     }
 
+    /**
+     *
+     * @param ins 流
+     * @param file excel文件
+     */
     private static void inputStreamToFile(InputStream ins, File file) {
         OutputStream os = null;
         try {

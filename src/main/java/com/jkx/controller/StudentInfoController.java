@@ -15,9 +15,6 @@ import java.io.File;
 import java.util.*;
 
 /**
- * <p>
- * 前端控制器
- * </p>
  *
  * @author ${zhang}
  * @since 2020-09-17
@@ -53,7 +50,7 @@ public class StudentInfoController {
 
     /**
      * 从excel取出数据，批量插入数据库
-     * @param multipartFile
+     * @param multipartFile 文件
      * @return
      */
     @PostMapping("/insert")
@@ -76,8 +73,8 @@ public class StudentInfoController {
     }
 
     /**
-     * 删除一个学生
-     * @param id
+     * 删除一个学生信息
+     * @param id 学生id
      * @return
      */
     @GetMapping("/delStudentInfo")
@@ -89,6 +86,11 @@ public class StudentInfoController {
         return Res.error();
     }
 
+    /**
+     * 批量删除学生信息
+     * @param ids 学生id集合
+     * @return
+     */
     @RequestMapping("/delSome")
     public Res delSomeStudent(@RequestBody List<String> ids){
         System.out.println("ssss");
@@ -102,12 +104,12 @@ public class StudentInfoController {
 
     /**
      * 保存一个学生
+     * @param map 学生信息
      * @return
      */
     @RequestMapping("/insertOne")
     public Res saveOne(@RequestBody Map<String, Object> map) {
 
-        System.out.println(map);
         // 得到数据库字段映射
         Map<String, String> excelMapper = excelService.getExcelMapper();
 

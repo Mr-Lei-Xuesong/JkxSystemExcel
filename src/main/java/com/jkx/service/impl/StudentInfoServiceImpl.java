@@ -3,12 +3,10 @@ package com.jkx.service.impl;
 import com.jkx.common.util.ExcelTypeUtils;
 import com.jkx.dao.StudentInfoDao;
 import com.jkx.service.StudentInfoService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +21,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     /**
      * 获取所有学生信息
-     * @return
+     * @return 学生信息集合
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -33,9 +31,9 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     /**
      * 批量插入学生信息
-     * @param data
-     * @param mapper
-     * @return
+     * @param data 学生信息
+     * @param mapper 映射表；重新排序为跟学生信息表字段一致用于插入
+     * @return 保存条数
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -57,8 +55,8 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     /**
      * 删除学生信息
-     * @param id
-     * @return
+     * @param id 学生id
+     * @return 是否成功
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -68,8 +66,8 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     /**
      * 批量删除
-     * @param ids
-     * @return
+     * @param ids 学生id集合
+     * @return 删除条数
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -80,8 +78,8 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     /**
      * 插入一条学生信息
-     * @param map
-     * @return
+     * @param map 学生信息集合
+     * @return 是否插入 1:成功， 0:失败
      */
     @Transactional(rollbackFor = Exception.class)
     @Override

@@ -25,6 +25,7 @@ public class ModDatabaseController {
     ColumnsConfig columnsConfig;
 
     /**
+     * 给数据库添加字段
      * @param colName     列名
      * @param colType     sql类型
      * @param colNum      字段长度
@@ -55,6 +56,11 @@ public class ModDatabaseController {
         return Res.error("添加字段失败");
     }
 
+    /**
+     * 删除数据库字段
+     * @param colName 数据库字段名
+     * @return
+     */
     @GetMapping("/del")
     public Res addColumn(String colName) {
         int i = modDatabaseService.deleteCol(colName);

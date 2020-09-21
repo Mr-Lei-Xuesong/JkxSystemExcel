@@ -18,12 +18,12 @@ public class ModDatabaseServiceImpl implements ModDatabaseService {
     ModDatabaseDao modDatabaseDao;
 
     /**
-     *
-     * @param colName
-     * @param databaseType
-     * @param colNum
-     * @param colComment
-     * @return 影响条数
+     * 在学生信息库中插入字段，更新映射表
+     * @param colName 数据库字段名
+     * @param databaseType 数据库类型
+     * @param colNum 类型大小
+     * @param colComment 类型注释
+     * @return 总影响条数
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -39,6 +39,11 @@ public class ModDatabaseServiceImpl implements ModDatabaseService {
         return 0;
     }
 
+    /**
+     * 在学生信息库中删除字段，更新映射表
+     * @param colName
+     * @return 总影响条数
+     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public int deleteCol(String colName) {
