@@ -1,6 +1,7 @@
 package com.jkx.controller;
 
 
+import com.jkx.common.annotation.Admin;
 import com.jkx.common.annotation.TokenRequired;
 import com.jkx.common.util.Res;
 import com.jkx.entity.User;
@@ -8,13 +9,11 @@ import com.jkx.service.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
- * <p>
- * 前端控制器
- * </p>
- *
+ * 用户控制器
  * @author leixuesong
  * @since 2020-09-17
  */
@@ -26,26 +25,23 @@ public class UsersController {
     @Autowired
     IUsersService usersService;
 
+    /**
+     * 获取用户列表
+     * @return 用户列表
+     */
+    @Admin
     @GetMapping("/list")
-    public Res getAll() {
+    public Res list(){
         List<User> list = usersService.list();
-        if (list.isEmpty()) {
-            return Res.error();
-        } else {
-            return Res.ok(list);
-        }
+        return Res.ok(list);
     }
 
-    @GetMapping("/get/{id}")
-    public Res getById(@PathVariable Integer id) {
-        User byId = usersService.getById(id);
-        if (byId != null) {
-            return Res.ok(byId);
-        } else {
-            return Res.error("用户不存在");
-        }
-    }
-
+    /**
+     * 新增用户
+     * @param users user
+     * @return res
+     */
+    @Admin
     @PostMapping("/save")
     public Res save(User users) {
         boolean save = usersService.save(users);
@@ -56,24 +52,18 @@ public class UsersController {
         }
     }
 
-    @PutMapping("/update")
-    public Res update(User users) {
-        boolean update = usersService.update(users, null);
-        if (update) {
-            return Res.ok("修改成功");
-        } else {
-            return Res.error("修改失败");
-        }
+    /**
+     * 检查 account 是否重复
+     * @param account 账号
+     * @return res
+     */
+    @GetMapping("/account-repeat")
+    public Res getById(String account) {
+        User user = usersService.findByAccount(account);
+        HashMap<String, Boolean> map = new HashMap<>(2);
+        map.put("valid", user == null);
+        return Res.ok(map);
     }
 
-    @DeleteMapping("/del/{id}")
-    public Res del(@PathVariable Integer id) {
-        boolean b = usersService.removeById(id);
-        if (b) {
-            return Res.ok("删除成功");
-        } else {
-            return Res.error("删除失败");
-        }
-    }
 }
 

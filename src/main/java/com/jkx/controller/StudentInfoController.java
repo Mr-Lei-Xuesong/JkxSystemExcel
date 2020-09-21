@@ -29,7 +29,6 @@ public class StudentInfoController {
 
     /**
      * 获取所有学生信息
-     *
      * @return
      */
     @Autowired
@@ -77,8 +76,8 @@ public class StudentInfoController {
      * @param id 学生id
      * @return
      */
-    @GetMapping("/delStudentInfo")
-    public Res delStudentInfo(int id) {
+    @GetMapping("/del/{id}")
+    public Res delStudentInfo(@PathVariable Integer id) {
         int i = studentService.delStudentInfo(id);
         if (i != 0) {
             return Res.ok("删除成功");
@@ -91,7 +90,7 @@ public class StudentInfoController {
      * @param ids 学生id集合
      * @return
      */
-    @RequestMapping("/delSome")
+    @RequestMapping("/del")
     public Res delSomeStudent(@RequestBody List<String> ids){
         System.out.println("ssss");
         int i = studentService.delSomeStudentInfo(ids);

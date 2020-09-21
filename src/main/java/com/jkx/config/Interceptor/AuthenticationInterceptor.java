@@ -5,6 +5,7 @@ import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.jkx.common.annotation.TokenRequired;
 import com.jkx.common.exception.LoginException;
+import com.jkx.common.util.CookiesUtils;
 import com.jkx.common.util.JwtUtil;
 import com.jkx.common.util.PasswordEncoder;
 import com.jkx.entity.User;
@@ -19,8 +20,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Optional;
 
 /**
  * @author lx
@@ -54,17 +53,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
         // 从 Cookie 中取出 token
         Cookie[] cookies = request.getCookies();
-        if (cookies == null) {
-            throw new LoginException(401,"未登录");
-        }
-        Optional<Cookie> first = Arrays.stream(cookies)
-                .filter(cookie -> "token".equals(cookie.getName()))
-                .findFirst();
-        Cookie tokenCookie = first.orElse(new Cookie("token",""));
-        String token = tokenCookie.getValue();
-        if (token == null) {
-            throw new LoginException(401,"未登录");
-        }
+        String token = CookiesUtils.get(cookies, "token");
 
         TokenRequired tokenRequired = classAnnotation ?
                 declaringClass.getAnnotation(TokenRequired.class) :

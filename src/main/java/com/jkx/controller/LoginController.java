@@ -7,10 +7,7 @@ import com.jkx.common.util.Res;
 import com.jkx.entity.User;
 import com.jkx.service.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author lx
  */
 @RestController
-@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
@@ -35,7 +31,7 @@ public class LoginController {
      * @param response response
      * @return Res
      */
-    @PostMapping
+    @PostMapping("/login")
     public Res login(@RequestBody LoginForm form, HttpServletResponse response) {
         String token;
         User user = usersService.findByAccount(form.getAccount());
@@ -49,5 +45,20 @@ public class LoginController {
         Cookie cookie = new Cookie("token",token);
         response.addCookie(cookie);
         return Res.ok(user.getAccount());
+    }
+
+
+    /**
+     * 登出
+     * @param response response
+     * @return res
+     */
+    @GetMapping("/logout")
+    public Res logout(HttpServletResponse response) {
+        //删除Cookie原理
+        Cookie cookie=new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return Res.ok();
     }
 }

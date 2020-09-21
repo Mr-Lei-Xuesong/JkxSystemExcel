@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: zxq
+    active: lx
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
@@ -13,3 +13,6 @@ server:
   servlet:
     encoding:
       charset: UTF-8
+    context-path: /jkxsys
+
+admins: admin

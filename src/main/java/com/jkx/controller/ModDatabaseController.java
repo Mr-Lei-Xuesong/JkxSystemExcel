@@ -15,7 +15,7 @@ import java.util.Map;
  */
 
 @RestController
-@RequestMapping("/modDatabase")
+@RequestMapping("/mod-database")
 public class ModDatabaseController {
 
     @Autowired
