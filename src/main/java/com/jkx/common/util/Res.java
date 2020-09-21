@@ -57,7 +57,7 @@ public class Res extends HashMap<String, Object> {
     }
 
     public static Res ok() {
-        return new Res();
+        return new Res().put("code", HttpStatus.SC_OK);
     }
 
     @Override
