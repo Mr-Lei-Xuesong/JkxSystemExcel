@@ -20,23 +20,21 @@ public class ModDatabaseServiceImpl implements ModDatabaseService {
     /**
      *
      * @param colName
-     * @param colType
+     * @param databaseType
      * @param colNum
      * @param colComment
      * @return 影响条数
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public int addCol(String colName,
-                      String colType,
-                      String colNum,
-                      String colComment,
-                      String excelName,
-                      String javaType) {
-        int i = modDatabaseDao.addCol(colName, colType, colNum, colComment);
-        int i1 = modDatabaseDao.addMapper(excelName, colName, javaType);
-        if (i != 0 && i1 != 0) {
-            return i+i1;
+    public int addCol(String colName, String databaseType, String colNum,
+                      String colComment, String excelName, String javaType,
+                      Boolean required, Object o) {
+        int result = modDatabaseDao.addCol(colName, databaseType, colNum, colComment, required, o);
+        int result1 = modDatabaseDao.addMapper(excelName, colName, javaType);
+
+        if (result != 0 && result1 != 0) {
+            return result+result1;
         }
         return 0;
     }

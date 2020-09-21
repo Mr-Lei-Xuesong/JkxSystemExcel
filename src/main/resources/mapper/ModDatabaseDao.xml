@@ -3,7 +3,10 @@
 <mapper namespace="com.jkx.dao.ModDatabaseDao">
 
     <update id="addCol">
-        alter table student_info ADD ${colName} ${colType}(${colNum}) comment '${colComment}'
+        alter table student_info ADD ${colName} ${colType}
+        <if test="required">(${colNum})</if>
+        default ${o}
+        comment '${colComment}'
     </update>
 
     <insert id="addMapper" >

@@ -13,16 +13,17 @@ public interface ModDatabaseDao {
 
     /**
      * 给数据库添加字段
-     * @param colName
-     * @param colType
-     * @param colNum
-     * @param colComment
-     * @return 影响条数
+     * @param colName 数据库字段名字
+     * @param colType 数据字段类型
+     * @param colNum 数据库字段大小
+     * @param colComment 数据库字段注释
+     * @param required 是否需要大小
+     * @param o 默认值
+     * @return
      */
-    int addCol(@Param("colName") String colName,
-               @Param("colType") String colType,
-               @Param("colNum") String colNum,
-               @Param("colComment") String colComment);
+    int addCol(@Param("colName") String colName, @Param("colType") String colType,
+               @Param("colNum") String colNum, @Param("colComment") String colComment,
+               @Param("required") Boolean required,@Param("o") Object o);
 
     /**
      * 在映射表，添加数据

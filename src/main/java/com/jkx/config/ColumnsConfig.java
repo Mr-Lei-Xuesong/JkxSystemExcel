@@ -33,4 +33,10 @@ public class ColumnsConfig {
      */
     private Map<String, String> columnDatabaseType;
 
+    /**
+     * 数据库字段的默认值
+     * { str : "" }
+     */
+    private Map<String, Object> columnDefault;
+
 }

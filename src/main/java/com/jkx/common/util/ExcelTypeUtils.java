@@ -1,11 +1,20 @@
 package com.jkx.common.util;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ExcelTypeUtils {
 
+    /**
+     * 遍历map 处理学生的信息
+     * @param map
+     * @param databaseType
+     * @return
+     */
     public static Map<String, Object> filter(Map<String, Object> map,
                                       Map<String, String> databaseType){
         for (Map.Entry<String, Object> entry : map.entrySet()) {
@@ -17,11 +26,11 @@ public class ExcelTypeUtils {
             }
             // 获取字段对应的类型
             // 如果是 java.sql.Timestamp 类型，并且没有值，就设置为当前日期
-            boolean judgeTime = databaseType.get(entry.getKey()).equals("java.sql.Timestamp")
+            boolean judgeTime = databaseType.get(entry.getKey()).equals("java.util.Date")
                     && (entry.getValue() == null || entry.getValue() == "");
             if (judgeTime) {
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                map.put(entry.getKey(), timestamp);
+                LocalDate localDate = LocalDate.now();
+                map.put(entry.getKey(), localDate);
             }
         }
         // 过滤 key 为null的值
@@ -39,9 +48,6 @@ public class ExcelTypeUtils {
         if (key == "" || " ".equals(key) || null == key) {
             return false;
         }
-//        if (null == key) {
-//            return false;
-//        }
         return true;
     }
 }
