@@ -5,7 +5,6 @@ import lombok.Setter;
 
 /**
  * 注册异常
- *
  * @author leixuesong
  */
 @Setter
