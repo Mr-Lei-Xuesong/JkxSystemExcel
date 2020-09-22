@@ -3,7 +3,6 @@ package com.jkx.common.exception;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.http.HttpStatus;
 
 /**
  * 登录异常、token异常
@@ -12,9 +11,9 @@ import org.springframework.http.HttpStatus;
 @Getter
 @Setter
 public class LoginException extends RuntimeException{
-    private HttpStatus code ;
+    private Integer code ;
 
-    public LoginException(HttpStatus code, String msg){
+    public LoginException(Integer code, String msg){
         super(msg);
         this.code = code;
     }

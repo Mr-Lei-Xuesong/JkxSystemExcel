@@ -10,8 +10,8 @@ import com.jkx.common.util.JwtUtil;
 import com.jkx.common.util.PasswordEncoder;
 import com.jkx.entity.User;
 import com.jkx.service.IUsersService;
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -65,18 +65,18 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 account = JWT.decode(token)
                         .getClaim("account").asString();
             } catch (JWTDecodeException j) {
-                throw new LoginException(HttpStatus.UNAUTHORIZED,"无效token");
+                throw new LoginException(HttpStatus.SC_UNAUTHORIZED,"无效token");
             }
             User user = usersService.findByAccount(account);
             if (user == null){
-                throw new LoginException(HttpStatus.UNAUTHORIZED,"无效token");
+                throw new LoginException(HttpStatus.SC_UNAUTHORIZED,"无效token");
             }
             try {
                 if (!JwtUtil.verity(token, user.getPassword())){
-                    throw new LoginException(HttpStatus.UNAUTHORIZED,"无效token");
+                    throw new LoginException(HttpStatus.SC_UNAUTHORIZED,"无效token");
                 }
             } catch (JWTVerificationException e) {
-                throw new LoginException(HttpStatus.UNAUTHORIZED,"无效token");
+                throw new LoginException(HttpStatus.SC_UNAUTHORIZED,"无效token");
             }
             return true;
         }

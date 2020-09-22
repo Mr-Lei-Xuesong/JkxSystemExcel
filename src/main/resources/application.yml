@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: lx
+    active: lei
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml

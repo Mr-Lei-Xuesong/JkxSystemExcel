@@ -4,8 +4,8 @@ import com.auth0.jwt.JWT;
 import com.jkx.common.annotation.Admin;
 import com.jkx.common.exception.LoginException;
 import com.jkx.common.util.CookiesUtils;
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -50,7 +50,7 @@ public class AdminInterceptor implements HandlerInterceptor {
             String account = JWT.decode(token)
                     .getClaim("account").asString();
             if (!admins.contains(account)) {
-                throw new LoginException(HttpStatus.UNAUTHORIZED,"禁止访问");
+                throw new LoginException(HttpStatus.SC_UNAUTHORIZED,"禁止访问");
             }
         }
         return true;

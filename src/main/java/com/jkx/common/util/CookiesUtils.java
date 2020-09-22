@@ -1,7 +1,7 @@
 package com.jkx.common.util;
 
 import com.jkx.common.exception.LoginException;
-import org.springframework.http.HttpStatus;
+import org.apache.http.HttpStatus;
 
 import javax.servlet.http.Cookie;
 import java.util.Arrays;
@@ -15,7 +15,7 @@ public class CookiesUtils {
     public static String get(Cookie[] cookies, String key) {
         String result;
         if (cookies == null) {
-            throw new LoginException(HttpStatus.UNAUTHORIZED,"无效token");
+            throw new LoginException(HttpStatus.SC_UNAUTHORIZED,"无效token");
         }
         Optional<Cookie> first = Arrays.stream(cookies)
                 .filter(cookie -> key.equals(cookie.getName()))
@@ -23,7 +23,7 @@ public class CookiesUtils {
         Cookie target = first.orElse(new Cookie(key,""));
         result = target.getValue();
         if (result == null) {
-            throw new LoginException(HttpStatus.UNAUTHORIZED,"无效token");
+            throw new LoginException(HttpStatus.SC_UNAUTHORIZED,"无效token");
         }
         return result;
     }
