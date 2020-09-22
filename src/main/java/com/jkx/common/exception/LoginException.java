@@ -1,15 +1,20 @@
 package com.jkx.common.exception;
 
-import lombok.Data;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.http.HttpStatus;
 
 /**
  * 登录异常、token异常
  * @author lx
  */
-@Data
+@Getter
+@Setter
 public class LoginException extends RuntimeException{
-    private Integer code;
-    public LoginException(Integer code, String msg){
+    private HttpStatus code ;
+
+    public LoginException(HttpStatus code, String msg){
         super(msg);
         this.code = code;
     }
