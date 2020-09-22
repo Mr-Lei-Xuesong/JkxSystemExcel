@@ -61,12 +61,12 @@ public class UsersController {
         if (user != null) {
             throw new RegisterException(HttpStatus.SC_INTERNAL_SERVER_ERROR, "用户名已存在");
         } else {
-            passwordEncoder.encode(users.getPassword());
+            users.setPassword(passwordEncoder.encode(users.getPassword()));
             boolean save = usersService.save(users);
             if (save) {
                 return Res.ok();
             } else {
-                throw new RegisterException(HttpStatus.SC_INTERNAL_SERVER_ERROR,"未知异常");
+                throw new RegisterException(HttpStatus.SC_INTERNAL_SERVER_ERROR, "未知异常");
             }
         }
     }
@@ -125,6 +125,7 @@ public class UsersController {
         if (account == null) {
             return Res.error("用户名不存在");
         } else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             boolean update = usersService.update(user, null);
             if (update) {
                 return Res.ok("修改成功");

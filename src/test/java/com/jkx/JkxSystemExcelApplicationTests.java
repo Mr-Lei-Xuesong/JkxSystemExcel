@@ -2,6 +2,7 @@ package com.jkx;
 
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
+import com.jkx.common.util.PasswordEncoder;
 import com.jkx.service.impl.ExcelServiceImpl;
 import com.jkx.service.impl.StudentInfoServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,8 @@ class JkxSystemExcelApplicationTests {
     StudentInfoServiceImpl studentService;
     @Autowired
     ExcelServiceImpl excelService;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Test
     void contextLoads() {
@@ -76,6 +79,12 @@ class JkxSystemExcelApplicationTests {
     void testClassType() {
         Map<String, String> type = excelService.getType();
         System.out.println(type);
+    }
+
+    @Test
+    void test1(){
+        String encode = passwordEncoder.encode("123456");
+        System.out.println(encode);
     }
 
 }
