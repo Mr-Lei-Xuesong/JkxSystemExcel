@@ -2,6 +2,7 @@ package com.jkx.controller;
 
 
 import cn.hutool.json.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.jkx.common.util.FileUtils;
 import com.jkx.common.util.Res;
 import com.jkx.service.impl.ExcelServiceImpl;
@@ -54,6 +55,7 @@ public class StudentInfoController {
      */
     @PostMapping("/insert")
     public Res insertStudentInfo(MultipartFile multipartFile) {
+        System.out.println("到文件一游="+ multipartFile);
         // 类型转换
         File file = FileUtils.multipartFileToFile(multipartFile);
         // 获取数据库字段名对应java的类型映射

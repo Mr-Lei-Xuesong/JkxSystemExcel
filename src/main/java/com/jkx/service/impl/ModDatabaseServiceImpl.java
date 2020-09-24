@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * @author Mr zhang
@@ -53,6 +56,15 @@ public class ModDatabaseServiceImpl implements ModDatabaseService {
             return i+i1;
         }
         return 0;
+    }
+
+    /**
+     * 查询映射表的数据库字段
+     * @return List<Map<String, String>>
+     */
+    @Override
+    public List<Map<String, String>> listColumn() {
+        return modDatabaseDao.listColumn();
     }
 
 }

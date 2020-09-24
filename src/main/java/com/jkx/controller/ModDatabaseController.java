@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -64,11 +65,17 @@ public class ModDatabaseController {
     @GetMapping("/del")
     public Res addColumn(String colName) {
         int i = modDatabaseService.deleteCol(colName);
-        if (i != 0) {
-            return Res.ok("删除字段成功");
-        }
-        return Res.error(500, "删除字段失败");
+        return i != 0 ? Res.ok("删除字段成功") : Res.error(500, "删除字段失败");
     }
 
+    /**
+     * 查看数据库所有的字段
+     * @return ListMap
+     */
+    @GetMapping("list")
+    public Res listColum(){
+        List<Map<String, String>> maps = modDatabaseService.listColumn();
+        return maps != null ?  Res.ok(maps) : Res.error("查询失败");
+    }
 
 }

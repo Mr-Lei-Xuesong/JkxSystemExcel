@@ -1,6 +1,11 @@
 package com.jkx.service;
 
 
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
+import java.util.Map;
+
 public interface ModDatabaseService {
 
     int addCol(String colName, String colType, String colNum,
@@ -8,5 +13,7 @@ public interface ModDatabaseService {
                Boolean required, Object o);
 
     int deleteCol(String colName);
+
+    List<Map<String, String>> listColumn();
 
 }

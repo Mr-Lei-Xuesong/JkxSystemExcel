@@ -2,7 +2,11 @@ package com.jkx.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Mr zhang
@@ -48,4 +52,11 @@ public interface ModDatabaseDao {
      * @return 影响条数
      */
     int deleteMapper(@Param("colName") String colName);
+
+    /**
+     * 查询映射表的数据库字段
+     * @return List<Map<String, String>>
+     */
+    @Select("select excel_name database_name from student_info_column_mapper")
+    List<Map<String, String>> listColumn();
 }
