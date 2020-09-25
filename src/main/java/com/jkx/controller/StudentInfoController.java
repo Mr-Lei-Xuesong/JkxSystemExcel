@@ -1,8 +1,6 @@
 package com.jkx.controller;
 
-
 import cn.hutool.json.JSONObject;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.jkx.common.util.FileUtils;
 import com.jkx.common.util.Res;
 import com.jkx.service.impl.ExcelServiceImpl;
@@ -17,24 +15,25 @@ import java.util.*;
 
 /**
  *
- * @author ${zhang}
+ * @author zhang
  * @since 2020-09-17
  */
 
 @RestController
-@RequestMapping("/studentInfo")
+@RequestMapping("/student-info")
 public class StudentInfoController {
 
     @Autowired
     StudentInfoServiceImpl studentService;
 
-    /**
-     * 获取所有学生信息
-     * @return
-     */
+
     @Autowired
     ExcelServiceImpl excelService;
 
+    /**
+     * 获取所有学生信息
+     * @return res
+     */
     @GetMapping("/list")
     public Res getSome() {
         List<Map<String, String>> studentInfo = studentService.getAll();
@@ -51,7 +50,7 @@ public class StudentInfoController {
     /**
      * 从excel取出数据，批量插入数据库
      * @param multipartFile 文件
-     * @return
+     * @return res
      */
     @PostMapping("/insert")
     public Res insertStudentInfo(MultipartFile multipartFile) {
@@ -76,7 +75,7 @@ public class StudentInfoController {
     /**
      * 删除一个学生信息
      * @param id 学生id
-     * @return
+     * @return res
      */
     @GetMapping("/del/{id}")
     public Res delStudentInfo(@PathVariable Integer id) {
@@ -90,7 +89,7 @@ public class StudentInfoController {
     /**
      * 批量删除学生信息
      * @param ids 学生id集合
-     * @return
+     * @return res
      */
     @RequestMapping("/del")
     public Res delSomeStudent(@RequestBody List<String> ids){
@@ -106,7 +105,7 @@ public class StudentInfoController {
     /**
      * 保存一个学生
      * @param map 学生信息
-     * @return
+     * @return res
      */
     @RequestMapping("/insertOne")
     public Res saveOne(@RequestBody Map<String, Object> map) {
