@@ -1,6 +1,7 @@
 package com.jkx.controller;
 
 import cn.hutool.json.JSONObject;
+import com.jkx.common.form.StudentQueryForm;
 import com.jkx.common.util.FileUtils;
 import com.jkx.common.util.Res;
 import com.jkx.service.impl.ExcelServiceImpl;
@@ -26,7 +27,6 @@ public class StudentInfoController {
     @Autowired
     StudentInfoServiceImpl studentService;
 
-
     @Autowired
     ExcelServiceImpl excelService;
 
@@ -37,16 +37,65 @@ public class StudentInfoController {
     @GetMapping("/list")
     public Res getSome() {
         List<Map<String, String>> studentInfo = studentService.getAll();
-        int ok = 0;
-        JSONObject jsonObject = new JSONObject();
-        if (studentInfo != null) {
-            ok = 1;
-        }
-        jsonObject.set("ok", ok);
-        jsonObject.set("data", studentInfo);
         return Res.ok(studentInfo);
     }
 
+    /**
+     * 查询学生信息，通过id
+     * @param id
+     * @return
+     */
+    @GetMapping("/queryById")
+    public Res queryById(@RequestParam("id") String id){
+        Map<String, String> studentInfo = studentService.queryById(id);
+        return Res.ok(studentInfo);
+    }
+
+    /**
+     * 多条件查询
+     * @param stu 查询条件表单
+     * @return Res
+     */
+    @GetMapping("/query")
+    public Res mulQuery(@RequestParam("stu-info") String stu) {
+        JSONObject form = new JSONObject(stu);
+        System.out.println(form);
+        StudentQueryForm studentQueryForm = new StudentQueryForm();
+        studentQueryForm.setGender((String) form.get("gender"));
+        studentQueryForm.setDepartment((String) form.get("department"));
+        studentQueryForm.setIsLoan((String) form.get("isLoan"));
+        studentQueryForm.setNation((String) form.get("nation"));
+        studentQueryForm.setPolitics((String) form.get("politics"));
+        studentQueryForm.setResidentType((String) form.get("residentType"));
+        studentQueryForm.setStuClass((String) form.get("stuClass"));
+        studentQueryForm.setStudentId((String) form.get("studentNum"));
+        studentQueryForm.setStudentName((String) form.get("studentName"));
+
+        List<Map<String, String>> maps = studentService.mulQuery(studentQueryForm);
+        if (maps.isEmpty()) {
+            return Res.error("未找到数据");
+        }
+        return Res.ok(maps);
+    }
+
+
+    /**
+     * 获取下载的数据
+     * @param colName
+     * @return Res
+     */
+    @GetMapping("/downByColName")
+    public Res findStudentByCondition(@RequestBody List<String> colName) {
+        System.out.println(colName);
+        List<Map<String, String>> maps = studentService.downByColName(colName);
+
+        if (maps.isEmpty()) {
+            return Res.error();
+        } else {
+            return Res.ok(maps);
+        }
+
+    }
     /**
      * 从excel取出数据，批量插入数据库
      * @param multipartFile 文件
@@ -123,5 +172,21 @@ public class StudentInfoController {
         return Res.error();
     }
 
+    /**
+     * 修改学生信息
+     * @return Res
+     */
+    @PostMapping("/update")
+    public Res updateStudentInfo(@RequestBody String stu){
+        JSONObject jsonObject = new JSONObject(stu);
+        if (jsonObject.size() == 1){
+            return Res.ok("你还没有选择字段", null);
+        }
+        int i = studentService.updateStudentInfo(jsonObject);
+        if (i != 0) {
+            return Res.ok("修改成功", null);
+        }
+        return Res.error("修改失败");
+    }
 }
 

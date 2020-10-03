@@ -2,9 +2,184 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jkx.dao.StudentInfoDao">
 
+    <update id="updateStudentInfo" parameterType="cn.hutool.json.JSONObject">
+        update student_info
+        <set>
+            <if test="studentInfo['gender'] != null and studentInfo['gender'] != ''">
+                gender = #{studentInfo.gender},
+            </if>
+            <if test="studentInfo['studentName'] != null and studentInfo['studentName'] != ''">
+                studentName = #{studentInfo.studentName},
+            </if>
+            <if test="studentInfo['college'] != null and studentInfo['college'] != ''">
+                college = #{studentInfo.college},
+            </if>
+            <if test="studentInfo['stuClass'] != null and studentInfo['stuClass'] != ''">
+                college = #{studentInfo.stuClass},
+            </if>
+            <if test="studentInfo['major'] != null and studentInfo['major'] != ''">
+                college = #{studentInfo.major},
+            </if>
+            <if test="studentInfo['birthday'] != null and studentInfo['birthday'] != ''">
+                college = #{studentInfo.birthday},
+            </if>
+            <if test="studentInfo['nativePlace'] != null and studentInfo['nativePlace'] != ''">
+                college = #{studentInfo.nativePlace},
+            </if>
+            <if test="studentInfo['nation'] != null and studentInfo['nation'] != ''">
+                college = #{studentInfo.nation},
+            </if>
+            <if test="studentInfo['familyTel'] != null and studentInfo['familyTel'] != ''">
+                college = #{studentInfo.familyTel},
+            </if>
+            <if test="studentInfo['politicCountenance'] != null and studentInfo['politicCountenance'] != ''">
+                college = #{studentInfo.politicCountenance},
+            </if>
+            <if test="studentInfo['inGrade'] != null and studentInfo['inGrade'] != ''">
+                college = #{studentInfo.inGrade},
+            </if>
+            <if test="studentInfo['inType'] != null and studentInfo['inType'] != ''">
+                college = #{studentInfo.inType},
+            </if>
+            <if test="studentInfo['email'] != null and studentInfo['email'] != ''">
+                college = #{studentInfo.email},
+            </if>
+            <if test="studentInfo['studyCategory'] != null and studentInfo['studyCategory'] != ''">
+                college = #{studentInfo.studyCategory},
+            </if>
+            <if test="studentInfo['studyStatus'] != null and studentInfo['studyStatus'] != ''">
+                college = #{studentInfo.studyStatus},
+            </if>
+            <if test="studentInfo['residentType'] != null and studentInfo['residentType'] != ''">
+                college = #{studentInfo.residentType},
+            </if>
+            <if test="studentInfo['bank'] != null and studentInfo['bank'] != ''">
+                college = #{studentInfo.bank},
+            </if>
+            <if test="studentInfo['bankCardID'] != null and studentInfo['bankCardID'] != ''">
+                college = #{studentInfo.bankCardID},
+            </if>
+            <if test="studentInfo['isLoan'] != null and studentInfo['isLoan'] != ''">
+                college = #{studentInfo.isLoan},
+            </if>
+            <if test="studentInfo['studentPlace'] != null and studentInfo['studentPlace'] != ''">
+                college = #{studentInfo.studentPlace},
+            </if>
+            <if test="studentInfo['identityType'] != null and studentInfo['identityType'] != ''">
+                college = #{studentInfo.identityType},
+            </if>
+            <if test="studentInfo['identityID'] != null and studentInfo['identityID'] != ''">
+                college = #{studentInfo.identityID},
+            </if>
+            <if test="studentInfo['fatherName'] != null and studentInfo['fatherName'] != ''">
+                college = #{studentInfo.fatherName},
+            </if>
+            <if test="studentInfo['fatherTel'] != null and studentInfo['fatherTel'] != ''">
+                college = #{studentInfo.fatherTel},
+            </if>
+            <if test="studentInfo['motherName'] != null and studentInfo['motherName'] != ''">
+                college = #{studentInfo.motherName},
+            </if>
+            <if test="studentInfo['motherTel'] != null and studentInfo['motherTel'] != ''">
+                college = #{studentInfo.motherTel},
+            </if>
+            <if test="studentInfo['selfTel'] != null and studentInfo['selfTel'] != ''">
+                college = #{studentInfo.selfTel},
+            </if>
+            <if test="studentInfo['address'] != null and studentInfo['address'] != ''">
+                college = #{studentInfo.address},
+            </if>
+            <if test="studentInfo['clothesSize'] != null and studentInfo['clothesSize'] != ''">
+                college = #{studentInfo.clothesSize},
+            </if>
+            <if test="studentInfo['shoeSize'] != null and studentInfo['shoeSize'] != ''">
+                college = #{studentInfo.shoeSize},
+            </if>
+            <if test="studentInfo['educationType'] != null and studentInfo['educationType'] != ''">
+                college = #{studentInfo.educationType},
+            </if>
+            <if test="studentInfo['dormNum'] != null and studentInfo['dormNum'] != ''">
+                college = #{studentInfo.dormNum},
+            </if>
+            <if test="studentInfo['examNum'] != null and studentInfo['examNum'] != ''">
+                college = #{studentInfo.examNum},
+            </if>
+            <if test="studentInfo['studentNum'] != null and studentInfo['studentNum'] != ''">
+                college = #{studentInfo.studentNum},
+            </if>
+            <if test="studentInfo['gradeFatherTel'] != null and studentInfo['gradeFatherTel'] != ''">
+                college = #{studentInfo.gradeFatherTel},
+            </if>
+            <if test="studentInfo['gradeMotherTel'] != null and studentInfo['gradeMotherTel'] != ''">
+                college = #{studentInfo.gradeMotherTel},
+            </if>
+            <if test="studentInfo['religion'] != null and studentInfo['religion'] != ''">
+                college = #{studentInfo.religion},
+            </if>
+            <if test="studentInfo['photo'] != null and studentInfo['photo'] != ''">
+                college = #{studentInfo.photo},
+            </if>
+        </set>
+        where Id = #{studentInfo.Id}
+    </update>
+
+    <select id="downByColName" parameterType="java.util.List" resultType="java.util.Map">
+        select
+        <choose>
+            <when test="colName == null or colName ==''">
+                *
+            </when>
+            <otherwise>
+                <foreach collection="colName" item="item" separator=",">
+                    ${item}
+                </foreach>
+            </otherwise>
+        </choose>
+        from student_info
+    </select>
+
     <select id="getAll" flushCache="true" resultType="java.util.Map">
         select * from student_info
     </select>
+
+    <select id="mulQuery" resultType="java.util.Map">
+        select * from student_info
+        <where>
+            <if test="studentId != null and studentId != ''">
+                AND studentNum like CONCAT(CONCAT('%',#{studentId}),'%')
+            </if>
+            <if test="studentName != null and studentName != ''">
+                AND studentName like CONCAT(CONCAT('%',#{studentName}),'%')
+            </if>
+            <if test="gender != null and gender != ''">
+                AND gender = #{gender}
+            </if>
+            <if test="department != null and department != ''">
+                AND college= #{department}
+            </if>
+            <if test="stuClass != null and stuClass != ''">
+                AND stuClass like CONCAT(CONCAT('%',#{stuClass}),'%')
+            </if>
+            <if test="nation != null and nation != ''">
+                AND nation = #{nation}
+            </if>
+            <if test="politics != null and politics != ''">
+                AND politicCountenance = #{politics}
+            </if>
+            <if test="residentType != null and residentType != ''">
+                AND residentType = #{residentType}
+            </if>
+            <if test="isLoan != null and isLoan != ''">
+                AND isLoan = #{isLoan}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="queryById" resultType="java.util.Map" parameterType="java.lang.String">
+        select * from student_info where Id = #{id}
+    </select>
+
 
     <insert id="saveAll">
         insert into student_info

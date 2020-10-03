@@ -1,5 +1,7 @@
 package com.jkx.dao;
 
+import cn.hutool.json.JSONObject;
+import com.jkx.common.form.StudentQueryForm;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,6 +23,25 @@ public interface StudentInfoDao {
     int saveAll(@Param("data") List<Map<String, Object>> data,
                 @Param("sortCol") List<String> sortCol);
 
+    /**
+     * 通过id获取学生信息
+     * @return 学生信息集合
+     */
+    Map<String, String> queryById(@Param("id") String id);
+
+    /**
+     * 多条件查询
+     * @param form 查询条件表单
+     * @return 学生数据
+     */
+    List<Map<String, String>> mulQuery(StudentQueryForm form);
+
+    /**
+     * 获取下载的数据
+     * @param colName
+     * @return  List<Map<String, String>>
+     */
+    List<Map<String, String>> downByColName(List<String> colName);
 
     /**
      * 删除学生信息通过id
@@ -45,5 +66,12 @@ public interface StudentInfoDao {
      */
     int saveOne(@Param("data") Map<String, Object> data,
                 @Param("sortCol") List<String> sortCol);
+
+    /**
+     * 修改学生信息
+     * @param studentInfo
+     * @return 是否修改成功 0为不成功，1成功
+     */
+    int updateStudentInfo(@Param("studentInfo") JSONObject studentInfo);
 
 }

@@ -1,5 +1,8 @@
 package com.jkx.service;
 
+import cn.hutool.json.JSONObject;
+import com.jkx.common.form.StudentQueryForm;
+
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +13,26 @@ public interface StudentInfoService {
      * @return 学生信息集合
      */
     List<Map<String, String>> getAll();
+
+    /**
+     * 通过id获取学生信息
+     * @return 学生信息集合
+     */
+    Map<String, String> queryById(String id);
+
+    /**
+     * 多条件查询
+     * @param form 查询条件表单
+     * @return 学生数据
+     */
+    List<Map<String, String>> mulQuery(StudentQueryForm form);
+
+    /**
+     * 获取下载的数据
+     * @param colName
+     * @return  List<Map<String, String>>
+     */
+    List<Map<String, String>> downByColName(List<String> colName);
 
     /**
      * 批量插入学生信息
@@ -42,5 +65,12 @@ public interface StudentInfoService {
     int saveOne(Map<String, Object> map,
                 Map<String, String> mapper,
                 Map<String, String> databaseType);
+
+    /**
+     * 修改学生信息
+     * @param studentInfo
+     * @return 是否修改成功 0为不成功，1成功
+     */
+    int updateStudentInfo(JSONObject studentInfo);
 
 }

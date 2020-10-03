@@ -28,9 +28,9 @@ public class GlobalExceptionHandler {
     }
 
 
-    @ExceptionHandler(Exception.class)
+//    @ExceptionHandler(RuntimeException.class)
     @ResponseBody
-    public Res ExceptionHandle() {
+    public Res ExceptionHandle(RuntimeException e) {
         return Res.error(HttpStatus.SC_INTERNAL_SERVER_ERROR, "未知异常，请联系管理员");
     }
 }

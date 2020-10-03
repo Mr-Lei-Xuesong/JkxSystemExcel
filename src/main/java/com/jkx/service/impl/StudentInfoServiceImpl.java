@@ -1,5 +1,7 @@
 package com.jkx.service.impl;
 
+import cn.hutool.json.JSONObject;
+import com.jkx.common.form.StudentQueryForm;
 import com.jkx.common.util.ExcelTypeUtils;
 import com.jkx.dao.StudentInfoDao;
 import com.jkx.service.StudentInfoService;
@@ -27,6 +29,25 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     @Override
     public List<Map<String, String>> getAll() {
         return studentInfoDao.getAll();
+    }
+
+    /**
+     * 通过id获取学生信息
+     * @return 学生信息集合
+     */
+    @Override
+    public Map<String, String> queryById(String id) {
+        return studentInfoDao.queryById(id);
+    }
+
+    @Override
+    public List<Map<String, String>> mulQuery(StudentQueryForm form) {
+        return studentInfoDao.mulQuery(form);
+    }
+
+    @Override
+    public List<Map<String, String>> downByColName(List<String> colName) {
+        return studentInfoDao.downByColName(colName);
     }
 
     /**
@@ -100,6 +121,10 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         return studentInfoDao.saveOne(filter, sortCol);
     }
 
+    @Override
+    public int updateStudentInfo(JSONObject studentInfo) {
+        return studentInfoDao.updateStudentInfo(studentInfo);
+    }
 
 
 }
