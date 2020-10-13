@@ -14,7 +14,6 @@ import java.util.Map;
 /**
  * @author Mr zhang
  */
-
 @RestController
 @RequestMapping("/mod-database")
 public class ModDatabaseController {
@@ -31,7 +30,7 @@ public class ModDatabaseController {
      * @param colType     sql类型
      * @param colNum      字段长度
      * @param colComment  sql注释
-     * @return
+     * @return Res
      */
     @GetMapping("/add")
     public Res addColumn(String excelName, String colName, String colType,
@@ -60,7 +59,7 @@ public class ModDatabaseController {
     /**
      * 删除数据库字段
      * @param colName 数据库字段名
-     * @return
+     * @return Res
      */
     @GetMapping("/del")
     public Res addColumn(String colName) {
@@ -70,7 +69,7 @@ public class ModDatabaseController {
 
     /**
      * 查看数据库所有的字段
-     * @return ListMap
+     * @return Res
      */
     @GetMapping("list")
     public Res listColum(){

@@ -19,7 +19,6 @@ import java.util.*;
  * @author zhang
  * @since 2020-09-17
  */
-
 @RestController
 @RequestMapping("/student-info")
 public class StudentInfoController {
@@ -42,8 +41,8 @@ public class StudentInfoController {
 
     /**
      * 查询学生信息，通过id
-     * @param id
-     * @return
+     * @param id 学生id
+     * @return Res
      */
     @GetMapping("/queryById")
     public Res queryById(@RequestParam("id") String id){
@@ -80,22 +79,20 @@ public class StudentInfoController {
 
 
     /**
-     * 获取下载的数据
-     * @param colName
+     * 根据字段名导出数据
+     * @param colName 字段名列表
      * @return Res
      */
-    @GetMapping("/downByColName")
+    @GetMapping("/download")
     public Res findStudentByCondition(@RequestBody List<String> colName) {
-        System.out.println(colName);
         List<Map<String, String>> maps = studentService.downByColName(colName);
-
         if (maps.isEmpty()) {
             return Res.error();
         } else {
             return Res.ok(maps);
         }
-
     }
+
     /**
      * 从excel取出数据，批量插入数据库
      * @param multipartFile 文件
