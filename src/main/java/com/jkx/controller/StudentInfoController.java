@@ -1,6 +1,7 @@
 package com.jkx.controller;
 
 import cn.hutool.json.JSONObject;
+import com.jkx.common.annotation.TokenRequired;
 import com.jkx.common.form.StudentQueryForm;
 import com.jkx.common.util.FileUtils;
 import com.jkx.common.util.Res;
@@ -21,6 +22,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/student-info")
+@TokenRequired
 public class StudentInfoController {
 
     @Autowired

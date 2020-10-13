@@ -1,5 +1,6 @@
 package com.jkx.controller;
 
+import com.jkx.common.annotation.TokenRequired;
 import com.jkx.common.util.Res;
 import com.jkx.config.ColumnsConfig;
 import com.jkx.service.impl.ModDatabaseServiceImpl;
@@ -16,6 +17,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/mod-database")
+@TokenRequired
 public class ModDatabaseController {
 
     @Autowired
