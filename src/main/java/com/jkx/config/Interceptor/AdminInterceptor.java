@@ -1,6 +1,7 @@
 package com.jkx.config.Interceptor;
 
 import com.auth0.jwt.JWT;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.jkx.common.annotation.Admin;
 import com.jkx.common.exception.LoginException;
 import com.jkx.common.util.CookiesUtils;
@@ -48,9 +49,13 @@ public class AdminInterceptor implements HandlerInterceptor {
                 declaringClass.getAnnotation(Admin.class) :
                 method.getAnnotation(Admin.class);
         if (admin.required()) {
-            // 从 Cookie 中取出 token
-            Cookie[] cookies = request.getCookies();
-            String token = CookiesUtils.get(cookies, "token");
+            // 从 Header 中取出 token
+            String token = request.getHeader("token");
+
+            if (StringUtils.isBlank(token)) {
+                throw new LoginException(HttpStatus.SC_UNAUTHORIZED,"无效token");
+            }
+
             String account = JWT.decode(token)
                     .getClaim("account").asString();
             if (!admins.contains(account)) {

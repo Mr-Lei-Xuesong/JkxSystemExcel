@@ -3,6 +3,7 @@ package com.jkx.config.Interceptor;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.jkx.common.annotation.TokenRequired;
 import com.jkx.common.exception.LoginException;
 import com.jkx.common.util.CookiesUtils;
@@ -52,9 +53,12 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        // 从 Cookie 中取出 token
-        Cookie[] cookies = request.getCookies();
-        String token = CookiesUtils.get(cookies, "token");
+        // 从header取出token
+        String token = request.getHeader("token");
+
+        if (StringUtils.isBlank(token)) {
+            throw new LoginException(HttpStatus.SC_UNAUTHORIZED,"无效token");
+        }
 
         TokenRequired tokenRequired = classAnnotation ?
                 declaringClass.getAnnotation(TokenRequired.class) :

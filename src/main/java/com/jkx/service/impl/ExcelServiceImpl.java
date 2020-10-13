@@ -14,6 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * @author zxp
+ */
 @Service
 public class ExcelServiceImpl implements ExcelService {
 
@@ -55,10 +58,10 @@ public class ExcelServiceImpl implements ExcelService {
         List<Map<String, String>> excelMapper = mapperMapper.getExcelMapper();
         Map<String, String> mapper = new HashMap<>(50);
         for (Map<String, String> map : excelMapper) {
-            String excel_name = map.get("excel_name");
-            String database_name = map.get("database_name");
+            String excelName = map.get("excel_name");
+            String databaseName = map.get("database_name");
             // 设置key - value
-            mapper.put(excel_name, database_name);
+            mapper.put(excelName, databaseName);
         }
         return mapper;
     }
