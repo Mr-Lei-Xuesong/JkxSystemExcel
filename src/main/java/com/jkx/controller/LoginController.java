@@ -45,7 +45,10 @@ public class LoginController {
             throw new LoginException(HttpStatus.SC_UNAUTHORIZED,"账号密码错误");
         }
         token = JwtUtil.sign(user.getAccount(),user.getPassword());
+
+        response.addHeader("Access-Control-Expose-Headers","token");
         response.addHeader("token",token);
+
         return Res.ok(user.getAccount());
     }
 

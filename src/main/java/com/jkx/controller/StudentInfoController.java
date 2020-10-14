@@ -1,6 +1,7 @@
 package com.jkx.controller;
 
 import cn.hutool.json.JSONObject;
+import com.jkx.common.annotation.Admin;
 import com.jkx.common.annotation.TokenRequired;
 import com.jkx.common.form.StudentQueryForm;
 import com.jkx.common.util.FileUtils;
@@ -125,6 +126,7 @@ public class StudentInfoController {
      * @param id 学生id
      * @return res
      */
+    @Admin
     @GetMapping("/del/{id}")
     public Res delStudentInfo(@PathVariable Integer id) {
         int i = studentService.delStudentInfo(id);
@@ -139,6 +141,7 @@ public class StudentInfoController {
      * @param ids 学生id集合
      * @return res
      */
+    @Admin
     @RequestMapping("/del")
     public Res delSomeStudent(@RequestBody List<String> ids){
         System.out.println("ssss");
@@ -155,6 +158,7 @@ public class StudentInfoController {
      * @param map 学生信息
      * @return res
      */
+    @Admin
     @RequestMapping("/insertOne")
     public Res saveOne(@RequestBody Map<String, Object> map) {
 
