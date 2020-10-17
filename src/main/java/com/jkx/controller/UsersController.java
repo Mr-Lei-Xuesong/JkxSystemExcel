@@ -74,18 +74,18 @@ public class UsersController {
     /**
      * 按用户名删除
      *
-     * @param Account 用户名
+     * @param account 用户名
      * @return res
      */
     @Admin
-    @DeleteMapping("/del/{Account}")
-    public Res del(@PathVariable String Account) {
-        User user = usersService.findByAccount(Account);
+    @DeleteMapping("/del/{account}")
+    public Res del(@PathVariable String account) {
+        User user = usersService.findByAccount(account);
         if (user == null) {
             return Res.error("用户名不存在");
         } else {
             QueryWrapper<User> wrapper = new QueryWrapper<>();
-            wrapper.eq("Account", Account);
+            wrapper.eq("Account", account);
             boolean b = usersService.remove(wrapper);
             if (b) {
                 return Res.ok("删除成功");
@@ -98,13 +98,13 @@ public class UsersController {
     /**
      * 根据用户名查找
      *
-     * @param Account 用户名
+     * @param account 用户名
      * @return res
      */
     @Admin
-    @GetMapping("/get/{Account}")
-    public Res getAccount(@PathVariable String Account) {
-        User user = usersService.findByAccount(Account);
+    @GetMapping("/get/{account}")
+    public Res getAccount(@PathVariable String account) {
+        User user = usersService.findByAccount(account);
         if (user == null) {
             return Res.error("用户名不存在");
         } else {

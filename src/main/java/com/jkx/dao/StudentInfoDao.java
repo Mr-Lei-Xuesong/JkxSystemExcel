@@ -10,14 +10,23 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author lx
+ */
 @Mapper
 @Repository
 public interface StudentInfoDao {
 
+    /**
+     * 获取全部
+     * @return 列表
+     */
     List<Map<String, String>> getAll();
 
     /**
      * 保存学生信息
+     * @param data 数据
+     * @param sortCol
      * @return 保存条数
      */
     int saveAll(@Param("data") List<Map<String, Object>> data,
@@ -38,14 +47,14 @@ public interface StudentInfoDao {
 
     /**
      * 获取下载的数据
-     * @param colName
+     * @param colName 字段名
      * @return  List<Map<String, String>>
      */
     List<Map<String, String>> downByColName(List<String> colName);
 
     /**
      * 删除学生信息通过id
-     * @param id
+     * @param id id
      * @return 删除条数
      */
     @Delete("delete from student_info where id = #{id}")

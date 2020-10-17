@@ -61,7 +61,6 @@ public class StudentInfoController {
     @GetMapping("/query")
     public Res mulQuery(@RequestParam("stu-info") String stu) {
         JSONObject form = new JSONObject(stu);
-        System.out.println(form);
         StudentQueryForm studentQueryForm = new StudentQueryForm();
         studentQueryForm.setGender((String) form.get("gender"));
         studentQueryForm.setDepartment((String) form.get("department"));
@@ -186,10 +185,8 @@ public class StudentInfoController {
             return Res.ok("你还没有选择字段", null);
         } else {
             for (int i = 0; i < jsonObject.size(); i++) {
-                Iterator iter = jsonObject.entrySet().iterator();
-                while (iter.hasNext()) {
-                    Map.Entry entry = (Map.Entry) iter.next();
-                    if (!entry.getKey().toString().equals("Id")&&entry.getValue().toString().equals("")){
+                for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
+                    if (!"Id".equals(entry.getKey()) && "".equals(entry.getValue().toString())) {
                         return Res.error("修改参数不能为空");
                     }
 

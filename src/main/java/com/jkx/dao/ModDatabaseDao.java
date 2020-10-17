@@ -42,13 +42,13 @@ public interface ModDatabaseDao {
 
     /**
      * 删除表字段
-     * @param colName
+     * @param colName 字段名
      * @return 影响条数
      */
     int deleteCol(@Param("colName") String colName);
     /**
      * 删除隐射表对应数据
-     * @param colName
+     * @param colName 字段名
      * @return 影响条数
      */
     int deleteMapper(@Param("colName") String colName);

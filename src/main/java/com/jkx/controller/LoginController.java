@@ -7,7 +7,6 @@ import com.jkx.common.util.PasswordEncoder;
 import com.jkx.common.util.Res;
 import com.jkx.entity.User;
 import com.jkx.service.IUsersService;
-import org.apache.http.Header;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
