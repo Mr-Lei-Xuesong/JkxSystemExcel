@@ -186,10 +186,10 @@ public class StudentInfoController {
         } else {
             for (int i = 0; i < jsonObject.size(); i++) {
                 for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
-                    if (!"Id".equals(entry.getKey()) && "".equals(entry.getValue().toString())) {
+                    if (!"Id".equals(entry.getKey())
+                            && "".equals(entry.getValue().toString())) {
                         return Res.error("修改参数不能为空");
                     }
-
                 }
             }
         }
