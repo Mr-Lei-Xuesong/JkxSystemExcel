@@ -184,6 +184,17 @@ public class StudentInfoController {
         JSONObject jsonObject = new JSONObject(stu);
         if (jsonObject.size() == 1){
             return Res.ok("你还没有选择字段", null);
+        } else {
+            for (int i = 0; i < jsonObject.size(); i++) {
+                Iterator iter = jsonObject.entrySet().iterator();
+                while (iter.hasNext()) {
+                    Map.Entry entry = (Map.Entry) iter.next();
+                    if (!entry.getKey().toString().equals("Id")&&entry.getValue().toString().equals("")){
+                        return Res.error("修改参数不能为空");
+                    }
+
+                }
+            }
         }
         int i = studentService.updateStudentInfo(jsonObject);
         if (i != 0) {

@@ -15,109 +15,109 @@
                 college = #{studentInfo.college},
             </if>
             <if test="studentInfo['stuClass'] != null and studentInfo['stuClass'] != ''">
-                college = #{studentInfo.stuClass},
+                stuClass = #{studentInfo.stuClass},
             </if>
             <if test="studentInfo['major'] != null and studentInfo['major'] != ''">
-                college = #{studentInfo.major},
+                major = #{studentInfo.major},
             </if>
             <if test="studentInfo['birthday'] != null and studentInfo['birthday'] != ''">
-                college = #{studentInfo.birthday},
+                birthday = #{studentInfo.birthday},
             </if>
             <if test="studentInfo['nativePlace'] != null and studentInfo['nativePlace'] != ''">
-                college = #{studentInfo.nativePlace},
+                nativePlace = #{studentInfo.nativePlace},
             </if>
             <if test="studentInfo['nation'] != null and studentInfo['nation'] != ''">
-                college = #{studentInfo.nation},
+                nation = #{studentInfo.nation},
             </if>
             <if test="studentInfo['familyTel'] != null and studentInfo['familyTel'] != ''">
-                college = #{studentInfo.familyTel},
+                familyTel = #{studentInfo.familyTel},
             </if>
             <if test="studentInfo['politicCountenance'] != null and studentInfo['politicCountenance'] != ''">
-                college = #{studentInfo.politicCountenance},
+                politicCountenance = #{studentInfo.politicCountenance},
             </if>
             <if test="studentInfo['inGrade'] != null and studentInfo['inGrade'] != ''">
-                college = #{studentInfo.inGrade},
+                inGrade = #{studentInfo.inGrade},
             </if>
             <if test="studentInfo['inType'] != null and studentInfo['inType'] != ''">
-                college = #{studentInfo.inType},
+                inType = #{studentInfo.inType},
             </if>
             <if test="studentInfo['email'] != null and studentInfo['email'] != ''">
-                college = #{studentInfo.email},
+                email = #{studentInfo.email},
             </if>
             <if test="studentInfo['studyCategory'] != null and studentInfo['studyCategory'] != ''">
-                college = #{studentInfo.studyCategory},
+                studyCategory = #{studentInfo.studyCategory},
             </if>
             <if test="studentInfo['studyStatus'] != null and studentInfo['studyStatus'] != ''">
-                college = #{studentInfo.studyStatus},
+                studyStatus = #{studentInfo.studyStatus},
             </if>
             <if test="studentInfo['residentType'] != null and studentInfo['residentType'] != ''">
-                college = #{studentInfo.residentType},
+                residentType = #{studentInfo.residentType},
             </if>
             <if test="studentInfo['bank'] != null and studentInfo['bank'] != ''">
-                college = #{studentInfo.bank},
+                bank = #{studentInfo.bank},
             </if>
             <if test="studentInfo['bankCardID'] != null and studentInfo['bankCardID'] != ''">
-                college = #{studentInfo.bankCardID},
+                bankCardID = #{studentInfo.bankCardID},
             </if>
             <if test="studentInfo['isLoan'] != null and studentInfo['isLoan'] != ''">
-                college = #{studentInfo.isLoan},
+                isLoan = #{studentInfo.isLoan},
             </if>
             <if test="studentInfo['studentPlace'] != null and studentInfo['studentPlace'] != ''">
-                college = #{studentInfo.studentPlace},
+                studentPlace = #{studentInfo.studentPlace},
             </if>
             <if test="studentInfo['identityType'] != null and studentInfo['identityType'] != ''">
-                college = #{studentInfo.identityType},
+                identityType = #{studentInfo.identityType},
             </if>
             <if test="studentInfo['identityID'] != null and studentInfo['identityID'] != ''">
-                college = #{studentInfo.identityID},
+                identityID = #{studentInfo.identityID},
             </if>
             <if test="studentInfo['fatherName'] != null and studentInfo['fatherName'] != ''">
-                college = #{studentInfo.fatherName},
+                fatherName = #{studentInfo.fatherName},
             </if>
             <if test="studentInfo['fatherTel'] != null and studentInfo['fatherTel'] != ''">
-                college = #{studentInfo.fatherTel},
+                fatherTel = #{studentInfo.fatherTel},
             </if>
             <if test="studentInfo['motherName'] != null and studentInfo['motherName'] != ''">
-                college = #{studentInfo.motherName},
+                motherName = #{studentInfo.motherName},
             </if>
             <if test="studentInfo['motherTel'] != null and studentInfo['motherTel'] != ''">
-                college = #{studentInfo.motherTel},
+                motherTel = #{studentInfo.motherTel},
             </if>
             <if test="studentInfo['selfTel'] != null and studentInfo['selfTel'] != ''">
-                college = #{studentInfo.selfTel},
+                selfTel = #{studentInfo.selfTel},
             </if>
             <if test="studentInfo['address'] != null and studentInfo['address'] != ''">
-                college = #{studentInfo.address},
+                address = #{studentInfo.address},
             </if>
             <if test="studentInfo['clothesSize'] != null and studentInfo['clothesSize'] != ''">
-                college = #{studentInfo.clothesSize},
+                clothesSize = #{studentInfo.clothesSize},
             </if>
             <if test="studentInfo['shoeSize'] != null and studentInfo['shoeSize'] != ''">
-                college = #{studentInfo.shoeSize},
+                shoeSize = #{studentInfo.shoeSize},
             </if>
             <if test="studentInfo['educationType'] != null and studentInfo['educationType'] != ''">
-                college = #{studentInfo.educationType},
+                educationType = #{studentInfo.educationType},
             </if>
             <if test="studentInfo['dormNum'] != null and studentInfo['dormNum'] != ''">
-                college = #{studentInfo.dormNum},
+                dormNum = #{studentInfo.dormNum},
             </if>
             <if test="studentInfo['examNum'] != null and studentInfo['examNum'] != ''">
-                college = #{studentInfo.examNum},
+                examNum = #{studentInfo.examNum},
             </if>
             <if test="studentInfo['studentNum'] != null and studentInfo['studentNum'] != ''">
-                college = #{studentInfo.studentNum},
+                studentNum = #{studentInfo.studentNum},
             </if>
             <if test="studentInfo['gradeFatherTel'] != null and studentInfo['gradeFatherTel'] != ''">
-                college = #{studentInfo.gradeFatherTel},
+                gradeFatherTel = #{studentInfo.gradeFatherTel},
             </if>
             <if test="studentInfo['gradeMotherTel'] != null and studentInfo['gradeMotherTel'] != ''">
-                college = #{studentInfo.gradeMotherTel},
+                gradeMotherTel = #{studentInfo.gradeMotherTel},
             </if>
             <if test="studentInfo['religion'] != null and studentInfo['religion'] != ''">
-                college = #{studentInfo.religion},
+                religion = #{studentInfo.religion},
             </if>
             <if test="studentInfo['photo'] != null and studentInfo['photo'] != ''">
-                college = #{studentInfo.photo},
+                photo = #{studentInfo.photo},
             </if>
         </set>
         where Id = #{studentInfo.Id}
