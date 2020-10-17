@@ -60,8 +60,8 @@ public class StudentInfoController {
      */
     @GetMapping("/query")
     public Res mulQuery(@RequestParam("stu-info") String stu) {
-        JSONObject form = new JSONObject(stu);
         StudentQueryForm studentQueryForm = new StudentQueryForm();
+        JSONObject form = new JSONObject(stu);
         studentQueryForm.setGender((String) form.get("gender"));
         studentQueryForm.setDepartment((String) form.get("department"));
         studentQueryForm.setIsLoan((String) form.get("isLoan"));
@@ -71,7 +71,6 @@ public class StudentInfoController {
         studentQueryForm.setStuClass((String) form.get("stuClass"));
         studentQueryForm.setStudentId((String) form.get("studentNum"));
         studentQueryForm.setStudentName((String) form.get("studentName"));
-
         List<Map<String, String>> maps = studentService.mulQuery(studentQueryForm);
         if (maps.isEmpty()) {
             return Res.error("未找到数据");
