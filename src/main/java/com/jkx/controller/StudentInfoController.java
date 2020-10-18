@@ -60,17 +60,17 @@ public class StudentInfoController {
      */
     @GetMapping("/query")
     public Res mulQuery(@RequestParam("stu-info") String stu) {
+        JSONObject from = new JSONObject(stu);
         StudentQueryForm studentQueryForm = new StudentQueryForm();
-        JSONObject form = new JSONObject(stu);
-        studentQueryForm.setGender((String) form.get("gender"));
-        studentQueryForm.setDepartment((String) form.get("department"));
-        studentQueryForm.setIsLoan((String) form.get("isLoan"));
-        studentQueryForm.setNation((String) form.get("nation"));
-        studentQueryForm.setPolitics((String) form.get("politics"));
-        studentQueryForm.setResidentType((String) form.get("residentType"));
-        studentQueryForm.setStuClass((String) form.get("stuClass"));
-        studentQueryForm.setStudentId((String) form.get("studentNum"));
-        studentQueryForm.setStudentName((String) form.get("studentName"));
+        studentQueryForm.setGender((String) from.get("gender"));
+        studentQueryForm.setDepartment((String) from.get("department"));
+        studentQueryForm.setIsLoan((String) from.get("isLoan"));
+        studentQueryForm.setNation((String) from.get("nation"));
+        studentQueryForm.setPolitics((String) from.get("politics"));
+        studentQueryForm.setResidentType((String) from.get("residentType"));
+        studentQueryForm.setStuClass((String) from.get("stuClass"));
+        studentQueryForm.setStudentId((String) from.get("studentNum"));
+        studentQueryForm.setStudentName((String) from.get("studentName"));
         List<Map<String, String>> maps = studentService.mulQuery(studentQueryForm);
         if (maps.isEmpty()) {
             return Res.error("未找到数据");
@@ -101,7 +101,6 @@ public class StudentInfoController {
      */
     @PostMapping("/insert")
     public Res insertStudentInfo(MultipartFile multipartFile) {
-        System.out.println("到文件一游="+ multipartFile);
         // 类型转换
         File file = FileUtils.multipartFileToFile(multipartFile);
         // 获取数据库字段名对应java的类型映射
@@ -142,7 +141,6 @@ public class StudentInfoController {
     @Admin
     @RequestMapping("/del")
     public Res delSomeStudent(@RequestBody List<String> ids){
-        System.out.println("ssss");
         int i = studentService.delSomeStudentInfo(ids);
         if (i != 0) {
             return Res.ok("删除成功");
