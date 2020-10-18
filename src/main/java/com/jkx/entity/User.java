@@ -11,11 +11,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * <p>
- * 
- * </p>
- *
- * @author ${author}
+ * @author zxq
  * @since 2020-09-17
  */
 @Data
@@ -30,91 +26,91 @@ public class User implements Serializable {
      * ID主键
      */
     @TableId(value = "Id", type = IdType.AUTO)
-    private Integer Id;
+    private Integer id;
 
     /**
      * 账户
      */
     @TableField("Account")
-    private String Account;
+    private String account;
 
     /**
      * 密码
      */
     @TableField("Password")
-    private String Password;
+    private String password;
 
     /**
      * 真名
      */
     @TableField("RealName")
-    private String RealName;
+    private String realName;
 
     /**
      * 性别
      */
     @TableField("Gender")
-    private String Gender;
+    private String gender;
 
     /**
      * 电话
      */
     @TableField("Tel")
-    private String Tel;
+    private String tel;
 
     /**
      * 邮箱
      */
     @TableField("Email")
-    private String Email;
+    private String email;
 
     /**
      * 部门
      */
     @TableField("Department")
-    private String Department;
+    private String department;
 
     /**
      * 描述
      */
     @TableField("Description")
-    private String Description;
+    private String description;
 
     /**
      * 上次登录
      */
     @TableField("PreviousVisit")
-    private LocalDate PreviousVisit;
+    private LocalDate previousVisit;
 
     /**
      * 最后登录
      */
     @TableField("LastVisit")
-    private LocalDate LastVisit;
+    private LocalDate lastVisit;
 
     /**
      * 创建时间
      */
     @TableField("CreateDate")
-    private LocalDate CreateDate;
+    private LocalDate createDate;
 
     /**
      * 创建用户
      */
     @TableField("CreateUser")
-    private String CreateUser;
+    private String createUser;
 
     /**
      * 修改时间
      */
     @TableField("ModifyDate")
-    private LocalDate ModifyDate;
+    private LocalDate modifyDate;
 
     /**
      * 修改用户
      */
     @TableField("ModifyUser")
-    private String ModifyUser;
+    private String modifyUser;
 
 
 }
