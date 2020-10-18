@@ -4,14 +4,12 @@ import com.auth0.jwt.JWT;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.jkx.common.annotation.Admin;
 import com.jkx.common.exception.LoginException;
-import com.jkx.common.util.CookiesUtils;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;

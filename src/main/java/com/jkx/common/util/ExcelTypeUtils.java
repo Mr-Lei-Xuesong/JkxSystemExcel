@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 /**
  * 处理excel数据，由serviceImpl调用
+ * @author lx
  */
 public class ExcelTypeUtils {
 
@@ -15,7 +16,7 @@ public class ExcelTypeUtils {
      * 遍历map 处理学生的信息
      * @param map 传入的学生信息
      * @param databaseType 数据库类型对应的Java类型
-     * @return
+     * @return map
      */
     public static Map<String, Object> filter(Map<String, Object> map,
                                       Map<String, String> databaseType){
@@ -23,12 +24,12 @@ public class ExcelTypeUtils {
             if (entry.getValue() == null) {
                 map.put(entry.getKey(), "");
             }
-            if (entry.getKey() == "") {
+            if ("".equals(entry.getKey())) {
                 continue;
             }
             // 获取字段对应的类型
             // 如果是 java.util.Date 类型，并且没有值，就设置为当前日期
-            boolean judgeTime = databaseType.get(entry.getKey()).equals("java.util.Date")
+            boolean judgeTime = "java.util.Date".equals(databaseType.get(entry.getKey()))
                     && StringUtils.isBlank((CharSequence) entry.getValue());
             if (judgeTime) {
                 LocalDate localDate = LocalDate.now();

@@ -6,7 +6,6 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.jkx.common.annotation.TokenRequired;
 import com.jkx.common.exception.LoginException;
-import com.jkx.common.util.CookiesUtils;
 import com.jkx.common.util.JwtUtil;
 import com.jkx.common.util.PasswordEncoder;
 import com.jkx.entity.User;
@@ -18,7 +17,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
