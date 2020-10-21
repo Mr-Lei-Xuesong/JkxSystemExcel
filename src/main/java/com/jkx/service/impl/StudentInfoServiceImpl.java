@@ -138,10 +138,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
                         Map.Entry::getValue
                 ));
 
-        // 遍历map 把值为null的修改为""
-        // Map<String, Object> filter = ExcelTypeUtils.filter(map, databaseType);
-        // 处理映射
-        // 把key为null的过滤掉，并写入list
+        // 遍历map 把值为null的修改为""  处理映射 把key为null的过滤掉，并写入list
         Set<String> columns = map.keySet();
         List<String> sortCol = new ArrayList<>(50);
         for (String col: columns) {

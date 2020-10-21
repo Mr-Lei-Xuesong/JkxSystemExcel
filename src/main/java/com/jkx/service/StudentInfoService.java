@@ -6,6 +6,9 @@ import com.jkx.common.form.StudentQueryForm;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Mr zhang
+ */
 public interface StudentInfoService {
 
     /**
@@ -16,6 +19,7 @@ public interface StudentInfoService {
 
     /**
      * 通过id获取学生信息
+     * @param id 学生id
      * @return 学生信息集合
      */
     Map<String, String> queryById(String id);
@@ -29,7 +33,7 @@ public interface StudentInfoService {
 
     /**
      * 获取下载的数据
-     * @param colName
+     * @param colName 列名
      * @return  List<Map<String, String>>
      */
     List<Map<String, String>> downByColName(List<String> colName);
@@ -60,6 +64,8 @@ public interface StudentInfoService {
     /**
      * 插入一条学生信息
      * @param map 学生信息集合
+     * @param databaseType 数据库类型
+     * @param mapper 映射
      * @return 是否插入 1:成功， 0:失败
      */
     int saveOne(Map<String, Object> map,
@@ -68,7 +74,7 @@ public interface StudentInfoService {
 
     /**
      * 修改学生信息
-     * @param studentInfo
+     * @param studentInfo 学生信息
      * @return 是否修改成功 0为不成功，1成功
      */
     int updateStudentInfo(JSONObject studentInfo);

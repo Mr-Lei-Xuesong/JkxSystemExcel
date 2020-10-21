@@ -44,7 +44,7 @@ public class ModDatabaseServiceImpl implements ModDatabaseService {
 
     /**
      * 在学生信息库中删除字段，更新映射表
-     * @param colName
+     * @param colName 列名
      * @return 总影响条数
      */
     @Transactional(rollbackFor = Exception.class)

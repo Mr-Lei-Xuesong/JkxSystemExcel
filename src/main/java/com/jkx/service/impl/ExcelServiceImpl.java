@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author zxp
@@ -22,9 +19,8 @@ public class ExcelServiceImpl implements ExcelService {
 
     /**
      * 解析excel文件
-     *
-     * @param file
-     * @return
+     * @param file excel文件
+     * @return 返回学生集合
      */
     @Override
     public List<Map<String, Object>> parseExcel(File file, Map<String, String> databaseType) {
@@ -50,8 +46,7 @@ public class ExcelServiceImpl implements ExcelService {
 
     /**
      * 得到映射表
-     *
-     * @return
+     * @return excel列与数据库列的对应关系
      */
     @Override
     public Map<String, String> getExcelMapper() {
@@ -69,7 +64,7 @@ public class ExcelServiceImpl implements ExcelService {
     /**
      * 获取数据库中 excel字段对应的java类型
      *
-     * @return
+     * @return 获取excel列对应的Java类型
      */
     @Override
     public Map<String, String> getType() {

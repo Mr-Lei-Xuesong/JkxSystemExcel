@@ -26,7 +26,7 @@ public interface StudentInfoDao {
     /**
      * 保存学生信息
      * @param data 数据
-     * @param sortCol
+     * @param sortCol 插入列排序
      * @return 保存条数
      */
     int saveAll(@Param("data") List<Map<String, Object>> data,
@@ -34,6 +34,7 @@ public interface StudentInfoDao {
 
     /**
      * 通过id获取学生信息
+     * @param id 学生id
      * @return 学生信息集合
      */
     Map<String, String> queryById(@Param("id") String id);
@@ -70,7 +71,8 @@ public interface StudentInfoDao {
 
     /**
      * 插入一条学生信息
-     * @param data
+     * @param data 学生信息
+     * @param sortCol 插入列的顺序
      * @return 影响条数
      */
     int saveOne(@Param("data") Map<String, Object> data,
@@ -78,7 +80,7 @@ public interface StudentInfoDao {
 
     /**
      * 修改学生信息
-     * @param studentInfo
+     * @param studentInfo 学生信息
      * @return 是否修改成功 0为不成功，1成功
      */
     int updateStudentInfo(@Param("studentInfo") JSONObject studentInfo);
