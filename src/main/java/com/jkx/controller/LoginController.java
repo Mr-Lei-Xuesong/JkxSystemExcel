@@ -11,7 +11,6 @@ import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -49,19 +48,5 @@ public class LoginController {
         response.addHeader("token",token);
 
         return Res.ok(user.getAccount());
-    }
-
-
-    /**
-     * 登出
-     * @param response response
-     * @return res
-     */
-    @GetMapping("/logout")
-    public Res logout(HttpServletResponse response) {
-        Cookie cookie=new Cookie("token", null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-        return Res.ok();
     }
 }
